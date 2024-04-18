@@ -29,6 +29,17 @@ alt-shift-7 = 'move-node-to-workspace 7'
 alt-shift-8 = 'move-node-to-workspace 8'
 alt-shift-9 = 'move-node-to-workspace 9'
 
+alt-n = 'workspace 1'
+alt-e = 'workspace 2'
+alt-i = 'workspace 3'
+alt-o = 'workspace 4'
+
+alt-shift-n = 'move-node-to-workspace 1'
+alt-shift-e = 'move-node-to-workspace 2'
+alt-shift-i = 'move-node-to-workspace 3'
+alt-shift-o = 'move-node-to-workspace 4'
+
+
 # Prevent accidental hiding
 cmd-h = []
 cmd-m = []

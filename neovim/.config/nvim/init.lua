@@ -36,15 +36,32 @@ vim.opt.colorcolumn = '80'
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
+-- Better saving
+vim.keymap.set("n", "<leader>s", ":w<CR>")
+
 -- Move lines up/down
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
-vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
+vim.keymap.set("v", "L", ":m '<-2<CR>gv=gv")
 
 -- Keep cursor in place when using J
 vim.keymap.set("n", "J", "mzJ`z")
 
--- Remap semicolon to colon
+-- remap semicolon to colon
 vim.api.nvim_set_keymap('n', ';', ':', { silent = false, noremap = true })
+vim.api.nvim_set_keymap('n', ':', ';', { silent = false, noremap = true })
+
+-- -- Remap directional keys
+vim.api.nvim_set_keymap('n', 'l', 'k', { silent = false, noremap = true })
+vim.api.nvim_set_keymap('v', 'l', 'k', { silent = false, noremap = true })
+vim.api.nvim_set_keymap('n', 'dl', 'dk', { silent = false, noremap = true })
+
+vim.api.nvim_set_keymap('n', 'k', 'h', { silent = false, noremap = true })
+vim.api.nvim_set_keymap('v', 'k', 'h', { silent = false, noremap = true })
+vim.api.nvim_set_keymap('n', 'dk', 'dh', { silent = false, noremap = true })
+
+vim.api.nvim_set_keymap('n', 'h', 'l', { silent = false, noremap = true })
+vim.api.nvim_set_keymap('v', 'h', 'l', { silent = false, noremap = true })
+vim.api.nvim_set_keymap('n', 'dh', 'dl', { silent = false, noremap = true })
 
 -- Shortcut to open the explorer
 vim.keymap.set("n", "<leader>b", vim.cmd.Ex)
@@ -59,6 +76,12 @@ vim.keymap.set("n", "N", "Nzzzv")
 
 -- Make paste better
 vim.keymap.set("x", "<leader>p", [["_dP]])
+
+-- chmod +x
+vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x '%'<CR>", { silent = true })
+
+-- Ruby Tests
+vim.keymap.set("n", "<leader>t", "<cmd>!test_launcher %<CR>", { silent = true }) -- TODO: Pass line number
 
 -- -- Yank to clipboard
 -- vim.keymap.set({"n", "v"}, "<leader>y", [["+y]])
@@ -83,7 +106,6 @@ require("lazy").setup({
   {
     "catppuccin/nvim",
     name = "catppuccin",
-    transparency = false,
     priority = 1000,
     config = function()
       require("catppuccin").setup {
@@ -98,7 +120,7 @@ require("lazy").setup({
   {
     'tpope/vim-fugitive',
     config = function()
-      vim.cmd("cnoreabbrev gs G")
+      vim.cmd("cnoreabbrev gs G") -- TODO: Get rid of these
       vim.cmd("cnoreabbrev gl G log")
       vim.cmd("cnoreabbrev ga G add")
       vim.cmd("cnoreabbrev gd G diff")
@@ -113,14 +135,28 @@ require("lazy").setup({
     'nvim-telescope/telescope.nvim', tag = '0.1.6',
     dependencies = {
       'nvim-lua/plenary.nvim',
+      'debugloop/telescope-undo.nvim',
       'BurntSushi/ripgrep'
     },
     config = function()
       local builtin = require('telescope.builtin')
-      vim.keymap.set('n', '<leader>f', builtin.find_files, {})
+
+      vim.keymap.set(
+        'n',
+        '<leader>f',
+        function ()
+          builtin.find_files {
+            find_command = { 'rg', '--files', '--iglob', '!.git', '--hidden' }
+          }
+        end,
+        {}
+      )
+
       vim.keymap.set('n', '<C-p>', builtin.git_files, {})
       vim.keymap.set('n', '<leader>g', builtin.live_grep, {})
+
       local actions = require("telescope.actions")
+
       require("telescope").setup{
         defaults = {
           mappings = {
@@ -128,8 +164,18 @@ require("lazy").setup({
               ["<esc>"] = actions.close
             },
           },
-        }
+        },
+        extensions = {
+          undo = {
+            -- telescope-undo.nvim config, see below
+          },
+          -- other extensions:
+          -- file_browser = { ... }
+        },
       }
+
+      require("telescope").load_extension("undo")
+      vim.keymap.set("n", "<leader>u", "<cmd>Telescope undo<cr>")
     end
   },
   {
@@ -138,7 +184,7 @@ require("lazy").setup({
     config = function()
       require'nvim-treesitter.configs'.setup {
         -- A list of parser names, or "all" (the five listed parsers should always be installed)
-        ensure_installed = { "vimdoc", "javascript", "typescript", "ruby", "python" },
+        ensure_installed = { "vimdoc", "javascript", "typescript", "ruby", "python", "html" },
 
         -- Install parsers synchronously (only applied to `ensure_installed`)
         sync_install = false,
@@ -188,6 +234,12 @@ require("lazy").setup({
       })
     end
   },
+  {
+    'WhoIsSethDaniel/toggle-lsp-diagnostics.nvim',
+    config = function()
+      require('toggle_lsp_diagnostics').init()
+    end
+  },
   {'williamboman/mason.nvim'},
   {'williamboman/mason-lspconfig.nvim'},
   {'neovim/nvim-lspconfig'},
@@ -208,12 +260,6 @@ require("lazy").setup({
       vim.keymap.set("n", "<leader>e", function() ui.nav_file(2) end)
       vim.keymap.set("n", "<leader>i", function() ui.nav_file(3) end)
       vim.keymap.set("n", "<leader>o", function() ui.nav_file(4) end)
-    end
-  },
-  {
-    "mbbill/undotree",
-    config = function()
-      vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
     end
   }
 })
