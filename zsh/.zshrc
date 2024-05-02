@@ -22,12 +22,15 @@ export ZSH_THEME="powerlevel10k/powerlevel10k"
 plugins=(asdf)
 source $ZSH/oh-my-zsh.sh
 alias zshrc="code ~/.zshrc"
-eval "$(fzf --zsh)" # fzf shell integration
 alias vi='nvim'
 alias vim='nvim'
 alias v='nvim'
 alias vv='nvim .'
 alias ts='tmux-sessionizer'
+
+# fzf
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+eval "$(fzf --zsh)" # fzf shell integration
 
 export FZF_DEFAULT_OPTS=" \
 --color=bg+:#313244,bg:#1e1e2e,spinner:#f5e0dc,hl:#f38ba8 \
@@ -91,3 +94,4 @@ alias fsother="foreman start all=1,web=0,webpacker=0"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
