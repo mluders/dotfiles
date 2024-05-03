@@ -104,15 +104,9 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
   {
-    "catppuccin/nvim",
-    name = "catppuccin",
-    priority = 1000,
+    'rebelot/kanagawa.nvim',
     config = function()
-      require("catppuccin").setup {
-        flavour = "mocha",
-      }
-
-      vim.cmd.colorscheme "catppuccin"
+      vim.cmd("colorscheme kanagawa")
     end
   },
   { 'tpope/vim-commentary' }, -- Comment stuff out
