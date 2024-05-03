@@ -1,3 +1,5 @@
+alias awsume=". /Users/miles.luders/.asdf/asdf.sh shell python 3.10.10; export ASDF_PYTHON_VERSION=3.10.10; . $(ASDF_PYTHON_VERSION=3.10.10 asdf which awsume) $@"
+
 export START_THE_SCHEDULER=YES
 export AUTO_MIGRATE_TEST_SCHEMA=1
 export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
@@ -5,4 +7,3 @@ export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
 alias ri-console="awsume appfolio-ri && aws --region=us-east-2 eks update-kubeconfig --name p1501 && kubectl afshell rentersinsurance --rails"
 alias tps-console="awsume appfolio-tps && aws --region=us-east-2 eks update-kubeconfig --name p1501 && kubectl afshell tps --rails"
 
-source .appfolio-secrets

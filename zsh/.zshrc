@@ -84,8 +84,8 @@ alias fsweb="foreman start all=0,web=1"
 alias fspack="foreman start all=0,webpacker=1"
 alias fsother="foreman start all=1,web=0,webpacker=0"
 
-[ -f ".zshrc-appfolio" ] && source .zshrc-appfolio
-[ -f ".zshrc.local" ] && source .zshrc.local
+[ -f "$HOME/.zshrc-local" ] && source $HOME/.zshrc-local
+[ -f "$HOME/.zshrc-appfolio" ] && source $HOME/.zshrc-appfolio
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
