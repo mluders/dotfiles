@@ -26,7 +26,7 @@ alias vi='nvim'
 alias vim='nvim'
 alias v='nvim'
 alias vv='nvim .'
-alias ts='tmux-sessionizer'
+alias s='source sessionizer'
 
 # fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
