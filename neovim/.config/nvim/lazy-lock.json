@@ -12,6 +12,7 @@
   "nvim-treesitter": { "branch": "master", "commit": "b04ccbd0e041bb05f3eef271124da02497d9d10c" },
   "plenary.nvim": { "branch": "master", "commit": "5129a3693c482fcbc5ab99a7706ffc4360b995a0" },
   "ripgrep": { "branch": "master", "commit": "bb8601b2bafb5e68181cbbb84e6ffa4f7a72bf16" },
+  "telescope-fzf-native.nvim": { "branch": "main", "commit": "9ef21b2e6bb6ebeaf349a0781745549bbb870d27" },
   "telescope-undo.nvim": { "branch": "main", "commit": "d19e2edc8b18d03283bd91f67310ac300ad003ce" },
   "telescope.nvim": { "branch": "master", "commit": "6312868392331c9c0f22725041f1ec2bef57c751" },
   "toggle-lsp-diagnostics.nvim": { "branch": "main", "commit": "fd66db3ae533f548d6fe26346e6afee3f539bf10" },

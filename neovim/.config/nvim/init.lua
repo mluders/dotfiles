@@ -124,13 +124,15 @@ require("lazy").setup({
       vim.cmd("cnoreabbrev gcan G commit --amend --no-edit")
       vim.cmd("cnoreabbrev gpu G push")
     end
-  }, -- Git
+  },
+  { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
   {
     'nvim-telescope/telescope.nvim', tag = '0.1.6',
     dependencies = {
       'nvim-lua/plenary.nvim',
       'debugloop/telescope-undo.nvim',
-      'BurntSushi/ripgrep'
+      'BurntSushi/ripgrep',
+      'nvim-telescope/telescope-fzf-native.nvim'
     },
     config = function()
       local builtin = require('telescope.builtin')
@@ -170,6 +172,8 @@ require("lazy").setup({
 
       require("telescope").load_extension("undo")
       vim.keymap.set("n", "<leader>u", "<cmd>Telescope undo<cr>")
+
+      require('telescope').load_extension('fzf')
     end
   },
   {
