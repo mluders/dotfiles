@@ -7,3 +7,4 @@ export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
 alias ri-console="awsume appfolio-ri && aws --region=us-east-2 eks update-kubeconfig --name p1501 && kubectl afshell rentersinsurance --rails"
 alias tps-console="awsume appfolio-tps && aws --region=us-east-2 eks update-kubeconfig --name p1501 && kubectl afshell tps --rails"
 
+eval $(otto autocomplete script zsh)
