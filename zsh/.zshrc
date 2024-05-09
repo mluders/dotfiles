@@ -58,7 +58,7 @@ alias gsh="git show"
 alias gw="git whatchanged"
 alias pr="gh pr view -w"
 alias repo="gh repo view -w"
-alias sw="git switch -"
+alias gsw="git switch -"
 alias wip="git commit -m 'wip'"
 
 # Rails
