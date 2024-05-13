@@ -26,9 +26,7 @@ source $ZSH/oh-my-zsh.sh
 alias zshrc="code ~/.zshrc"
 alias vi='nvim'
 alias vim='nvim'
-alias v='nvim'
-alias vv='nvim .'
-alias s='source sessionizer'
+alias vv='source sessionizer'
 
 # fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
