@@ -29,6 +29,7 @@ alias vim='nvim'
 alias vv='source sessionizer'
 
 # fzf
+ESCDELAY=0 # Remove escape key delay
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 eval "$(fzf --zsh)" # fzf shell integration
 
