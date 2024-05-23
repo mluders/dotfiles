@@ -84,13 +84,18 @@ vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x '%'<CR>", { silent = true })
 vim.keymap.set("n", "<leader>c", "<cmd>let @+=@%<CR>", { silent = true })
 
 -- Ruby Tests
--- vim.keymap.set("n", "<leader>t", "<cmd>!test_launcher %<CR>", { silent = true }) -- TODO: Pass line number
 vim.keymap.set("n", "<leader>t", function()
   local current_file = vim.fn.expand('%')
   local current_line = vim.fn.line('.')
-  local command = "test_launcher " .. current_file .. ":" .. current_line
-  vim.fn.setreg('+', command)
+  local command = "terminal test_launcher " .. current_file .. ":" .. current_line
+  vim.cmd(command)
 end, { silent = true })
+
+-- Automatically change to insert mode any time a terminal is opened
+vim.api.nvim_create_autocmd({ 'TermOpen' }, {
+  pattern = { '*' },
+  command = "startinsert"
+})
 
 -- -- Yank to clipboard
 -- vim.keymap.set({"n", "v"}, "<leader>y", [["+y]])
