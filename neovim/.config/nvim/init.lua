@@ -80,8 +80,17 @@ vim.keymap.set("x", "<leader>p", [["_dP]])
 -- chmod +x
 vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x '%'<CR>", { silent = true })
 
+-- Copy file path
+vim.keymap.set("n", "<leader>c", "<cmd>let @+=@%<CR>", { silent = true })
+
 -- Ruby Tests
-vim.keymap.set("n", "<leader>t", "<cmd>!test_launcher %<CR>", { silent = true }) -- TODO: Pass line number
+-- vim.keymap.set("n", "<leader>t", "<cmd>!test_launcher %<CR>", { silent = true }) -- TODO: Pass line number
+vim.keymap.set("n", "<leader>t", function()
+  local current_file = vim.fn.expand('%')
+  local current_line = vim.fn.line('.')
+  local command = "test_launcher " .. current_file .. ":" .. current_line
+  vim.fn.setreg('+', command)
+end, { silent = true })
 
 -- -- Yank to clipboard
 -- vim.keymap.set({"n", "v"}, "<leader>y", [["+y]])
