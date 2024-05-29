@@ -26,7 +26,9 @@ source $ZSH/oh-my-zsh.sh
 alias zshrc="code ~/.zshrc"
 alias vi='nvim'
 alias vim='nvim'
-alias vv='source sessionizer'
+alias vv='nvim .'
+alias vf='source sessionizer && nvim .'
+alias f='source sessionizer'
 
 # fzf
 ESCDELAY=0 # Remove escape key delay
