@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+dir=$(find -L ~ ~/work ~/personal ~/work/apm_bundle/apps -mindepth 1 -maxdepth 1 -type d | fzf)
+
+if [[ -n $dir ]]; then
+	cd $dir
+fi
+

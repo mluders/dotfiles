@@ -14,6 +14,9 @@ export HISTSIZE=99999999
 export SAVEHIST=$HISTSIZE
 export EDITOR=nvim
 
+# Local scripts
+export PATH="$HOME/.local/scripts:$PATH"
+
 # Brew
 export PATH="/opt/homebrew/bin:$PATH"
 
