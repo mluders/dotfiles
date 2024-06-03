@@ -146,10 +146,17 @@ require("lazy").setup({
       'nvim-lua/plenary.nvim',
       'debugloop/telescope-undo.nvim',
       'BurntSushi/ripgrep',
-      'nvim-telescope/telescope-fzf-native.nvim'
+      'nvim-telescope/telescope-fzf-native.nvim',
+      {
+        "nvim-telescope/telescope-live-grep-args.nvim" ,
+        -- This will not install any breaking changes.
+        -- For major updates, this must be adjusted manually.
+        version = "^1.0.0",
+      },
     },
     config = function()
       local builtin = require('telescope.builtin')
+      local lga_actions = require("telescope-live-grep-args.actions")
 
       vim.keymap.set(
         'n',
@@ -163,7 +170,12 @@ require("lazy").setup({
       )
 
       vim.keymap.set('n', '<C-p>', builtin.git_files, {})
-      vim.keymap.set('n', '<leader>g', builtin.live_grep, {})
+      vim.keymap.set('n', '<leader>g', require('telescope').extensions.live_grep_args.live_grep_args, {})
+      vim.keymap.set('n', '<leader>r', require('telescope.builtin').resume, {
+        noremap = true,
+        silent = true,
+        desc = "Resume",
+      })
 
       local actions = require("telescope.actions")
 
@@ -171,7 +183,11 @@ require("lazy").setup({
         defaults = {
           mappings = {
             i = {
-              ["<esc>"] = actions.close
+              ["<esc>"] = actions.close,
+              ["<C-k>"] = lga_actions.quote_prompt(),
+              ["<C-i>"] = lga_actions.quote_prompt({ postfix = " --iglob " }),
+              -- freeze the current list and start a fuzzy search in the frozen list
+              ["<C-space>"] = actions.to_fuzzy_refine,
             },
           },
         },
@@ -188,6 +204,7 @@ require("lazy").setup({
       vim.keymap.set("n", "<leader>u", "<cmd>Telescope undo<cr>")
 
       require('telescope').load_extension('fzf')
+      require('telescope').load_extension('live_grep_args')
     end
   },
   {
