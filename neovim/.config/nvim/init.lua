@@ -4,6 +4,12 @@ vim.opt.guicursor = ''
 -- Disable line wrap
 vim.opt.wrap = false
 
+-- I write a lot of Ruby and JS
+vim.opt.tabstop = 2
+vim.opt.softtabstop = 2
+vim.opt.shiftwidth = 2
+vim.opt.expandtab = true
+
 -- Colors
 vim.cmd('set termguicolors')
 
