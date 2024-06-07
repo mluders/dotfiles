@@ -21,8 +21,11 @@ vim.opt.hlsearch = false
 vim.opt.incsearch = true
 
 -- Make line numbers default
-vim.opt.number = true
-vim.opt.relativenumber = true
+vim.opt.number = false
+vim.opt.relativenumber = false
+
+-- Increase sign column width (for comfy-line-numbers plugin)
+vim.cmd('set signcolumn=yes:2')
 
 -- Sync clipboard between OS and Neovim.
 --  Remove this option if you want your OS clipboard to remain independent.
@@ -268,6 +271,7 @@ require("lazy").setup({
   {'hrsh7th/cmp-nvim-lsp'},
   {'hrsh7th/nvim-cmp'},
   {'L3MON4D3/LuaSnip'},
+  { dir = "~/personal/comfy-line-numbers.nvim" },
   {
     "theprimeagen/harpoon",
     config = function()
