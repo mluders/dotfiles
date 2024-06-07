@@ -40,28 +40,28 @@ vim.g.maplocalleader = ' '
 vim.keymap.set("n", "<leader>s", ":w<CR>")
 
 -- Move lines up/down
-vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
-vim.keymap.set("v", "L", ":m '<-2<CR>gv=gv")
+vim.keymap.set("v", "L", ":m '>+1<CR>gv=gv")
+vim.keymap.set("v", "H", ":m '<-2<CR>gv=gv")
 
--- Keep cursor in place when using J
-vim.keymap.set("n", "J", "mzJ`z")
+-- -- Keep cursor in place when using J
+-- vim.keymap.set("n", "J", "mzJ`z")
 
 -- remap semicolon to colon
 vim.api.nvim_set_keymap('n', ';', ':', { silent = false, noremap = true })
 vim.api.nvim_set_keymap('n', ':', ';', { silent = false, noremap = true })
 
--- -- Remap directional keys
-vim.api.nvim_set_keymap('n', 'l', 'k', { silent = false, noremap = true })
-vim.api.nvim_set_keymap('v', 'l', 'k', { silent = false, noremap = true })
-vim.api.nvim_set_keymap('n', 'dl', 'dk', { silent = false, noremap = true })
+-- Remap directional key
+-- vim.api.nvim_set_keymap('n', 'h', 'j', { silent = false, noremap = true })
+-- vim.api.nvim_set_keymap('v', 'h', 'j', { silent = false, noremap = true })
+-- vim.api.nvim_set_keymap('n', 'dh', 'dj', { silent = false, noremap = true })
 
-vim.api.nvim_set_keymap('n', 'k', 'h', { silent = false, noremap = true })
-vim.api.nvim_set_keymap('v', 'k', 'h', { silent = false, noremap = true })
-vim.api.nvim_set_keymap('n', 'dk', 'dh', { silent = false, noremap = true })
+-- vim.api.nvim_set_keymap('n', 'l', 'k', { silent = false, noremap = true })
+-- vim.api.nvim_set_keymap('v', 'l', 'k', { silent = false, noremap = true })
+-- vim.api.nvim_set_keymap('n', 'dl', 'dk', { silent = false, noremap = true })
 
-vim.api.nvim_set_keymap('n', 'h', 'l', { silent = false, noremap = true })
-vim.api.nvim_set_keymap('v', 'h', 'l', { silent = false, noremap = true })
-vim.api.nvim_set_keymap('n', 'dh', 'dl', { silent = false, noremap = true })
+-- vim.api.nvim_set_keymap('n', 'k', 'l', { silent = false, noremap = true })
+-- vim.api.nvim_set_keymap('v', 'k', 'l', { silent = false, noremap = true })
+-- vim.api.nvim_set_keymap('n', 'dh', 'dl', { silent = false, noremap = true })
 
 -- Shortcut to open the explorer
 vim.keymap.set("n", "<leader>b", vim.cmd.Ex)
