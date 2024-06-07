@@ -1,3 +1,6 @@
+-- Swap directional keys to make them more comfortable with Colemak
+vim.cmd('set langmap=jh,kl,lk,hj')
+
 -- Fat cursor
 vim.opt.guicursor = ''
 
@@ -46,28 +49,12 @@ vim.g.maplocalleader = ' '
 vim.keymap.set("n", "<leader>s", ":w<CR>")
 
 -- Move lines up/down
-vim.keymap.set("v", "L", ":m '>+1<CR>gv=gv")
-vim.keymap.set("v", "H", ":m '<-2<CR>gv=gv")
+vim.keymap.set("v", "L", ":m '<-2<CR>gv=gv")
+vim.keymap.set("v", "H", ":m '>+1<CR>gv=gv")
 
--- -- Keep cursor in place when using J
--- vim.keymap.set("n", "J", "mzJ`z")
-
--- remap semicolon to colon
+-- Remap semicolon to colon
 vim.api.nvim_set_keymap('n', ';', ':', { silent = false, noremap = true })
 vim.api.nvim_set_keymap('n', ':', ';', { silent = false, noremap = true })
-
--- Remap directional key
--- vim.api.nvim_set_keymap('n', 'h', 'j', { silent = false, noremap = true })
--- vim.api.nvim_set_keymap('v', 'h', 'j', { silent = false, noremap = true })
--- vim.api.nvim_set_keymap('n', 'dh', 'dj', { silent = false, noremap = true })
-
--- vim.api.nvim_set_keymap('n', 'l', 'k', { silent = false, noremap = true })
--- vim.api.nvim_set_keymap('v', 'l', 'k', { silent = false, noremap = true })
--- vim.api.nvim_set_keymap('n', 'dl', 'dk', { silent = false, noremap = true })
-
--- vim.api.nvim_set_keymap('n', 'k', 'l', { silent = false, noremap = true })
--- vim.api.nvim_set_keymap('v', 'k', 'l', { silent = false, noremap = true })
--- vim.api.nvim_set_keymap('n', 'dh', 'dl', { silent = false, noremap = true })
 
 -- Shortcut to open the explorer
 vim.keymap.set("n", "<leader>b", vim.cmd.Ex)
@@ -288,7 +275,7 @@ require("lazy").setup({
       local ui = require("harpoon.ui")
 
       vim.keymap.set("n", "<leader>a", mark.add_file)
-      vim.keymap.set("n", "<leader>h", ui.toggle_quick_menu)
+      vim.keymap.set("n", "<leader>j", ui.toggle_quick_menu) -- h is langmapped to j
       vim.keymap.set("n", "<C-n>", function() ui.nav_prev() end)
       vim.keymap.set("n", "<C-e>", function() ui.nav_next() end)
       vim.keymap.set("n", "<leader>n", function() ui.nav_file(1) end)
