@@ -110,6 +110,12 @@ require("lazy").setup({
   },
   { 'tpope/vim-sleuth' }, -- Detect tabstop and shiftwidth automatically
   {
+    'kana/vim-textobj-entire',
+    dependencies = {
+      'kana/vim-textobj-user'
+    }
+  },
+  {
     'tpope/vim-fugitive',
     config = function()
       vim.cmd("cnoreabbrev gs G") -- TODO: Get rid of these
