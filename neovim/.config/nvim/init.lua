@@ -1,6 +1,12 @@
 -- Swap directional keys to make them more comfortable with Colemak
 vim.cmd('set langmap=jh,kl,lk,hj')
 
+-- Colors
+vim.cmd('set termguicolors')
+
+-- Increase sign column width (for comfy-line-numbers plugin)
+vim.cmd('set signcolumn=yes:2')
+
 -- Disable line wrap
 vim.opt.wrap = false
 
@@ -10,9 +16,6 @@ vim.opt.softtabstop = 2
 vim.opt.shiftwidth = 2
 vim.opt.expandtab = true
 
--- Colors
-vim.cmd('set termguicolors')
-
 -- Better search
 vim.opt.hlsearch = false
 vim.opt.incsearch = true
@@ -20,9 +23,6 @@ vim.opt.incsearch = true
 -- Make line numbers default
 vim.opt.number = false
 vim.opt.relativenumber = false
-
--- Increase sign column width (for comfy-line-numbers plugin)
-vim.cmd('set signcolumn=yes:2')
 
 -- Sync clipboard between OS and Neovim.
 --  Remove this option if you want your OS clipboard to remain independent.
