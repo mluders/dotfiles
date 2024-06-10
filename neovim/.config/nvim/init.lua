@@ -83,6 +83,7 @@ end, { silent = true })
 
 -- Automatically change to insert mode any time a terminal is opened
 vim.api.nvim_create_autocmd({ 'TermOpen' }, {
+  group = vim.api.nvim_create_augroup('user_term_open', {clear = true}),
   pattern = { '*' },
   command = "startinsert"
 })
@@ -115,6 +116,7 @@ require("lazy").setup({
       'kana/vim-textobj-user'
     }
   },
+  { dir = "~/personal/comfy-line-numbers.nvim" },
   {
     'tpope/vim-fugitive',
     config = function()
@@ -228,45 +230,6 @@ require("lazy").setup({
     end
   },
   {
-    'VonHeikemen/lsp-zero.nvim', branch = 'v3.x',
-    config = function()
-      local lsp_zero = require('lsp-zero')
-
-      lsp_zero.on_attach(function(client, bufnr)
-        -- see :help lsp-zero-keybindings
-        -- to learn the available actions
-        lsp_zero.default_keymaps({buffer = bufnr})
-      end)
-
-      -- to learn how to use mason.nvim
-      -- read this: https://github.com/VonHeikemen/lsp-zero.nvim/blob/v3.x/doc/md/guide/integrate-with-mason-nvim.md
-      require('mason').setup({})
-      require('mason-lspconfig').setup({
-        ensure_installed = {
-          'solargraph'
-        },
-        handlers = {
-          function(server_name)
-            require('lspconfig').solargraph.setup({})
-          end,
-        },
-      })
-    end
-  },
-  {
-    'WhoIsSethDaniel/toggle-lsp-diagnostics.nvim',
-    config = function()
-      require('toggle_lsp_diagnostics').init()
-    end
-  },
-  {'williamboman/mason.nvim'},
-  {'williamboman/mason-lspconfig.nvim'},
-  {'neovim/nvim-lspconfig'},
-  {'hrsh7th/cmp-nvim-lsp'},
-  {'hrsh7th/nvim-cmp'},
-  {'L3MON4D3/LuaSnip'},
-  { dir = "~/personal/comfy-line-numbers.nvim" },
-  {
     "theprimeagen/harpoon",
     config = function()
       local mark = require("harpoon.mark")
@@ -281,6 +244,91 @@ require("lazy").setup({
       vim.keymap.set("n", "<leader>i", function() ui.nav_file(3) end)
       vim.keymap.set("n", "<leader>o", function() ui.nav_file(4) end)
     end
-  }
+  },
+  -- {
+  --   'VonHeikemen/lsp-zero.nvim', branch = 'v3.x',
+  --   config = function()
+  --     local lsp_zero = require('lsp-zero')
+  --
+  --     lsp_zero.on_attach(function(client, bufnr)
+  --       -- see :help lsp-zero-keybindings
+  --       -- to learn the available actions
+  --       lsp_zero.default_keymaps({buffer = bufnr})
+  --     end)
+  --
+  --     -- to learn how to use mason.nvim
+  --     -- read this: https://github.com/VonHeikemen/lsp-zero.nvim/blob/v3.x/doc/md/guide/integrate-with-mason-nvim.md
+  --     require('mason').setup({})
+  --     require('mason-lspconfig').setup({
+  --       ensure_installed = {
+  --         'solargraph'
+  --       },
+  --       handlers = {
+  --         function(server_name)
+  --           require('lspconfig').solargraph.setup({})
+  --         end,
+  --       },
+  --     })
+  --   end
+  -- },
+  {
+    'WhoIsSethDaniel/toggle-lsp-diagnostics.nvim',
+    config = function()
+      require('toggle_lsp_diagnostics').init()
+    end
+  },
+  { 'neovim/nvim-lspconfig' },
+  -- { 'williamboman/mason.nvim' },
+  -- { 'williamboman/mason-lspconfig.nvim' } ,
+  { 'hrsh7th/nvim-cmp' },
+  { 'hrsh7th/cmp-nvim-lsp' },
+  { 'hrsh7th/cmp-buffer' },
+  { 'hrsh7th/cmp-path' },
 })
 
+-- LSP
+vim.api.nvim_create_autocmd('LspAttach', {
+  group = vim.api.nvim_create_augroup('user_lsp_attach', {clear = true}),
+  callback = function(event)
+    local opts = {buffer = event.buf}
+
+    print('ruby_lsp attached')
+
+    vim.keymap.set('n', 'gd', function() vim.lsp.buf.definition() end, opts)
+    vim.keymap.set('n', 'K', function() vim.lsp.buf.hover() end, opts)
+    vim.keymap.set('n', '<leader>vws', function() vim.lsp.buf.workspace_symbol() end, opts)
+    vim.keymap.set('n', '<leader>vd', function() vim.diagnostic.open_float() end, opts)
+    vim.keymap.set('n', '[d', function() vim.diagnostic.goto_next() end, opts)
+    vim.keymap.set('n', ']d', function() vim.diagnostic.goto_prev() end, opts)
+    vim.keymap.set('n', '<leader>vca', function() vim.lsp.buf.code_action() end, opts)
+    vim.keymap.set('n', '<leader>vrr', function() vim.lsp.buf.references() end, opts)
+    vim.keymap.set('n', '<leader>vrn', function() vim.lsp.buf.rename() end, opts)
+    vim.keymap.set('i', '<C-h>', function() vim.lsp.buf.signature_help() end, opts)
+  end,
+})
+
+vim.api.nvim_create_autocmd('InsertEnter', {
+  group = vim.api.nvim_create_augroup('user_insert_enter', {clear = true}),
+  callback = function(_event)
+    vim.cmd('ToggleDiagOff')
+  end,
+})
+
+vim.api.nvim_create_autocmd('InsertLeave', {
+  group = vim.api.nvim_create_augroup('user_insert_leave', {clear = true}),
+  callback = function(_event)
+    vim.cmd('ToggleDiagOn')
+  end,
+})
+
+local lsp_capabilities = require('cmp_nvim_lsp').default_capabilities()
+
+-- require('mason').setup({})
+-- require('mason-lspconfig').setup({
+--   ensure_installed = { 'ruby_lsp' }
+-- })
+
+require'lspconfig'.ruby_lsp.setup{}
+
+local cmp = require('cmp')
+local cmp_select = {behavior = cmp.SelectBehavior.Select}
