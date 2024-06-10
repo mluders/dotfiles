@@ -53,8 +53,8 @@ vim.keymap.set("v", "L", ":m '<-2<CR>gv=gv")
 vim.keymap.set("v", "H", ":m '>+1<CR>gv=gv")
 
 -- Remap semicolon to colon
-vim.api.nvim_set_keymap('n', ';', ':', { silent = false, noremap = true })
-vim.api.nvim_set_keymap('n', ':', ';', { silent = false, noremap = true })
+vim.keymap.set('n', ';', ':', { silent = false, noremap = true })
+vim.keymap.set('n', ':', ';', { silent = false, noremap = true })
 
 -- Shortcut to open the explorer
 vim.keymap.set("n", "<leader>b", vim.cmd.Ex)
