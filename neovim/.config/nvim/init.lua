@@ -1,9 +1,6 @@
 -- Swap directional keys to make them more comfortable with Colemak
 vim.cmd('set langmap=jh,kl,lk,hj')
 
--- Fat cursor
-vim.opt.guicursor = ''
-
 -- Disable line wrap
 vim.opt.wrap = false
 
@@ -73,9 +70,6 @@ vim.keymap.set("n", "N", "Nzzzv")
 -- Make paste better
 vim.keymap.set("x", "<leader>p", [["_dP]])
 
--- chmod +x
-vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x '%'<CR>", { silent = true })
-
 -- Copy file path
 vim.keymap.set("n", "<leader>c", "<cmd>let @+=@%<CR>", { silent = true })
 
@@ -92,11 +86,6 @@ vim.api.nvim_create_autocmd({ 'TermOpen' }, {
   pattern = { '*' },
   command = "startinsert"
 })
-
--- -- Yank to clipboard
--- vim.keymap.set({"n", "v"}, "<leader>y", [["+y]])
--- vim.keymap.set("n", "<leader>Y", [["+Y]])
--- vim.keymap.set({"n", "v"}, "<leader>d", [["_d]])
 
 -- Install lazy.nvim plugin manager
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -119,7 +108,6 @@ require("lazy").setup({
       vim.cmd("colorscheme kanagawa")
     end
   },
-  { 'tpope/vim-commentary' }, -- Comment stuff out
   { 'tpope/vim-sleuth' }, -- Detect tabstop and shiftwidth automatically
   {
     'tpope/vim-fugitive',
