@@ -30,7 +30,7 @@ alias zshrc="code ~/.zshrc"
 alias vi='nvim'
 alias vim='nvim'
 alias vv='nvim .'
-alias vf='source sessionizer && nvim .'
+alias vf='source sessionizer 1'
 alias f='source sessionizer'
 
 # fzf
