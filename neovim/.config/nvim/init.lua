@@ -274,7 +274,7 @@ require("lazy").setup({
   {
     'WhoIsSethDaniel/toggle-lsp-diagnostics.nvim',
     config = function()
-      require('toggle_lsp_diagnostics').init()
+      require('toggle_lsp_diagnostics').init({ start_on = false })
     end
   },
   { 'neovim/nvim-lspconfig' },
@@ -304,20 +304,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
     vim.keymap.set('n', '<leader>vrr', function() vim.lsp.buf.references() end, opts)
     vim.keymap.set('n', '<leader>vrn', function() vim.lsp.buf.rename() end, opts)
     vim.keymap.set('i', '<C-h>', function() vim.lsp.buf.signature_help() end, opts)
-  end,
-})
-
-vim.api.nvim_create_autocmd('InsertEnter', {
-  group = vim.api.nvim_create_augroup('user_insert_enter', {clear = true}),
-  callback = function(_event)
-    vim.cmd('ToggleDiagOff')
-  end,
-})
-
-vim.api.nvim_create_autocmd('InsertLeave', {
-  group = vim.api.nvim_create_augroup('user_insert_leave', {clear = true}),
-  callback = function(_event)
-    vim.cmd('ToggleDiagOn')
   end,
 })
 
