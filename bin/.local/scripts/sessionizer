@@ -4,8 +4,8 @@ open_vim=${1:-0}
 echo $open_vim
 dirs=(~ ~/work ~/personal)
 
-if [ -d ~/work/hello ]; then
-    dirs+=(~/work/hello)
+if [ -d ~/work/apm_bundle ]; then
+    dirs+=(~/work/apm_bundle/apps)
 fi
 
 dir=$(find -L "${dirs[@]}" -mindepth 1 -maxdepth 1 -type d | fzf)
