@@ -7,6 +7,10 @@ vim.cmd('set termguicolors')
 -- Increase sign column width (for comfy-line-numbers plugin)
 vim.cmd('set signcolumn=yes:2')
 
+-- Ignore case if search pattern contains lowercase letters only
+vim.cmd('set ignorecase')
+vim.cmd('set smartcase')
+
 -- Disable line wrap
 vim.opt.wrap = false
 
