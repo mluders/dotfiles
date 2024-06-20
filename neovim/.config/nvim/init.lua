@@ -200,6 +200,9 @@ require("lazy").setup({
           undo = {
             -- telescope-undo.nvim config, see below
           },
+          fzf = {
+            case_mode = "ignore_case",        -- or "ignore_case" or "respect_case"
+          }
           -- other extensions:
           -- file_browser = { ... }
         },
