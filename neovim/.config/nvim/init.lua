@@ -72,7 +72,8 @@ vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
 
 -- Make paste better
-vim.keymap.set("x", "<leader>p", [["_dP]])
+vim.keymap.set({ "n", "v" }, "<leader>p", [["0p]])
+vim.keymap.set({ "n", "v" }, "<leader>P", [["0P]])
 
 -- Copy file path
 vim.keymap.set("n", "<leader>c", "<cmd>let @+=@%<CR>", { silent = true })
