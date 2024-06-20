@@ -107,10 +107,19 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
+  -- {
+  --   'rebelot/kanagawa.nvim',
+  --   config = function()
+  --     vim.cmd("colorscheme kanagawa")
+  --   end
+  -- },
   {
-    'rebelot/kanagawa.nvim',
+    "folke/tokyonight.nvim",
+    lazy = false,
+    priority = 1000,
+    opts = {},
     config = function()
-      vim.cmd("colorscheme kanagawa")
+      vim.cmd("colorscheme tokyonight")
     end
   },
   { 'tpope/vim-sleuth' }, -- Detect tabstop and shiftwidth automatically
