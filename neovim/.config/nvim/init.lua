@@ -1,5 +1,9 @@
 -- Swap directional keys to make them more comfortable with Colemak
-vim.cmd('set langmap=jh,kl,lk,hj')
+-- vim.cmd('set langmap=jh,kl,lk,hj')
+vim.keymap.set({ 'n', 'v', 's', 'o' }, "j", "h", { silent = true, noremap = true })
+vim.keymap.set({ 'n', 'v', 's', 'o' }, "k", "l", { silent = true, noremap = true })
+vim.keymap.set({ 'n', 'v', 's', 'o' }, "l", "k", { silent = true, noremap = true })
+vim.keymap.set({ 'n', 'v', 's', 'o' }, "h", "j", { silent = true, noremap = true })
 
 -- Colors
 vim.cmd('set termguicolors')
