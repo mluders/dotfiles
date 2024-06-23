@@ -111,6 +111,12 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+local lazy_opts = {
+  dev = {
+    path = '/Users/miles.luders/personal'
+  }
+}
+
 require("lazy").setup({
   {
     'rebelot/kanagawa.nvim',
@@ -125,7 +131,22 @@ require("lazy").setup({
       'kana/vim-textobj-user'
     }
   },
-  { dir = "~/personal/comfy-line-numbers.nvim" },
+  {
+    'mluders/comfy-line-numbers.nvim',
+    dev = true,
+    enabled = true, -- false to disable plugin
+    opts = {
+      up_key = 'l',
+      down_key = 'h',
+      labels = {
+        '1', '2', '3', '4', '5', '12', '13', '14', '15', '21',
+        '23', '24', '25', '31', '32', '33', '34', '35', '41', '42', '43',
+        '44', '45', '51', '52', '53', '54', '55', '91', '92', '93', '94', '95',
+        '81', '82', '83', '84', '85', '10', '20', '30', '40', '50', '71', '72',
+        '73', '74', '75', '61', '62', '63', '64', '65'
+      }
+    },
+  },
   {
     'tpope/vim-fugitive',
     config = function()
@@ -296,7 +317,7 @@ require("lazy").setup({
   { 'hrsh7th/cmp-nvim-lsp' },
   { 'hrsh7th/cmp-buffer' },
   { 'hrsh7th/cmp-path' },
-})
+}, lazy_opts)
 
 -- LSP
 vim.api.nvim_create_autocmd('LspAttach', {
@@ -319,14 +340,15 @@ vim.api.nvim_create_autocmd('LspAttach', {
   end,
 })
 
-local lsp_capabilities = require('cmp_nvim_lsp').default_capabilities()
+-- local lsp_capabilities = require('cmp_nvim_lsp').default_capabilities()
+--
+-- -- require('mason').setup({})
+-- -- require('mason-lspconfig').setup({
+-- --   ensure_installed = { 'ruby_lsp' }
+-- -- })
+--
+-- require'lspconfig'.ruby_lsp.setup{}
+--
+-- local cmp = require('cmp')
+-- local cmp_select = {behavior = cmp.SelectBehavior.Select}
 
--- require('mason').setup({})
--- require('mason-lspconfig').setup({
---   ensure_installed = { 'ruby_lsp' }
--- })
-
-require'lspconfig'.ruby_lsp.setup{}
-
-local cmp = require('cmp')
-local cmp_select = {behavior = cmp.SelectBehavior.Select}
