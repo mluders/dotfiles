@@ -269,7 +269,7 @@ require("lazy").setup({
       local ui = require("harpoon.ui")
 
       vim.keymap.set("n", "<leader>a", mark.add_file)
-      vim.keymap.set("n", "<leader>j", ui.toggle_quick_menu) -- h is langmapped to j
+      vim.keymap.set("n", "<leader>h", ui.toggle_quick_menu)
       vim.keymap.set("n", "<C-n>", function() ui.nav_prev() end)
       vim.keymap.set("n", "<C-e>", function() ui.nav_next() end)
       vim.keymap.set("n", "<leader>n", function() ui.nav_file(1) end)
