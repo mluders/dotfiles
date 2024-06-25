@@ -133,7 +133,7 @@ require("lazy").setup({
   },
   {
     'mluders/comfy-line-numbers.nvim',
-    dev = true,
+    dev = false,
     enabled = true, -- false to disable plugin
     opts = {
       up_key = 'l',
