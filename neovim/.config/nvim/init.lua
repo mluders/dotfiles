@@ -131,6 +131,7 @@ require("lazy").setup({
       'kana/vim-textobj-user'
     }
   },
+  { 'nvim-tree/nvim-web-devicons' },
   {
     'mluders/comfy-line-numbers.nvim',
     dev = false,
