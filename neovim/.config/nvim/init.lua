@@ -28,7 +28,7 @@ vim.opt.expandtab = true
 vim.opt.hlsearch = false
 vim.opt.incsearch = true
 
--- Make line numbers default
+-- Hide line numbers (they're handled by Comfy)
 vim.opt.number = false
 vim.opt.relativenumber = false
 
