@@ -265,39 +265,58 @@ require("lazy").setup({
     end
   },
   {
-    "theprimeagen/harpoon",
+    "ThePrimeagen/harpoon",
+    branch = "harpoon2",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    name = "harpoon",
     config = function()
-      require("harpoon").setup({
-        menu = {
-          width = vim.api.nvim_win_get_width(0) - 4,
+      local harpoon = require('harpoon')
+
+      harpoon:setup({
+        settings = {
+          save_on_toggle = true
         }
       })
 
-      local mark = require("harpoon.mark")
-      local ui = require("harpoon.ui")
+      -- basic telescope configuration
+      local conf = require("telescope.config").values
+      local function toggle_telescope(harpoon_files)
+        local file_paths = {}
+        for _, item in ipairs(harpoon_files.items) do
+            table.insert(file_paths, item.value)
+        end
 
-      vim.keymap.set("n", "<leader>a", mark.add_file)
-      vim.keymap.set("n", "<leader>h", ui.toggle_quick_menu)
-      vim.keymap.set("n", "<C-n>", function() ui.nav_prev() end)
-      vim.keymap.set("n", "<C-e>", function() ui.nav_next() end)
-      vim.keymap.set("n", "<leader>n", function() ui.nav_file(1) end)
-      vim.keymap.set("n", "<leader>e", function() ui.nav_file(2) end)
-      vim.keymap.set("n", "<leader>i", function() ui.nav_file(3) end)
-      vim.keymap.set("n", "<leader>o", function() ui.nav_file(4) end)
+        require("telescope.pickers").new({}, {
+            prompt_title = "Harpoon",
+            finder = require("telescope.finders").new_table({
+                results = file_paths,
+            }),
+            previewer = conf.file_previewer({}),
+            sorter = conf.generic_sorter({}),
+        }):find()
+      end
+
+      vim.keymap.set("n", "<C-h>", function() toggle_telescope(harpoon:list()) end, { desc = "Open harpoon window" })
+      vim.keymap.set("n", "<leader>h", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
+      vim.keymap.set("n", "<leader>a", function() harpoon:list():add() end)
+      vim.keymap.set("n", "<leader>n", function() harpoon:list():select(1) end)
+      vim.keymap.set("n", "<leader>e", function() harpoon:list():select(2) end)
+      vim.keymap.set("n", "<leader>i", function() harpoon:list():select(3) end)
+      vim.keymap.set("n", "<leader>o", function() harpoon:list():select(4) end)
     end
   },
-  -- {
-  --   'VonHeikemen/lsp-zero.nvim', branch = 'v3.x',
-  --   config = function()
-  --     local lsp_zero = require('lsp-zero')
-  --
-  --     lsp_zero.on_attach(function(client, bufnr)
-  --       -- see :help lsp-zero-keybindings
-  --       -- to learn the available actions
-  --       lsp_zero.default_keymaps({buffer = bufnr})
-  --     end)
-  --
-  --     -- to learn how to use mason.nvim
+  -- -- {
+  -- --   'VonHeikemen/lsp-zero.nvim', branch = 'v3.x',
+  -- --   config = function()
+  -- --     local lsp_zero = require('lsp-zero')
+  -- --
+  -- --     lsp_zero.on_attach(function(client, bufnr)
+  -- --       -- see :help lsp-zero-keybindings
+  -- --       -- to learn the available actions
+  -- --       lsp_zero.default_keymaps({buffer = bufnr})
+  -- --     end)
+  -- --
+  -- --     -- to learn how to use mason.nvim
   --     -- read this: https://github.com/VonHeikemen/lsp-zero.nvim/blob/v3.x/doc/md/guide/integrate-with-mason-nvim.md
   --     require('mason').setup({})
   --     require('mason-lspconfig').setup({
@@ -312,12 +331,7 @@ require("lazy").setup({
   --     })
   --   end
   -- },
-  {
-    'WhoIsSethDaniel/toggle-lsp-diagnostics.nvim',
-    config = function()
-      require('toggle_lsp_diagnostics').init({ start_on = false })
-    end
-  },
+
   { 'neovim/nvim-lspconfig' },
   -- { 'williamboman/mason.nvim' },
   -- { 'williamboman/mason-lspconfig.nvim' } ,
@@ -326,37 +340,4 @@ require("lazy").setup({
   { 'hrsh7th/cmp-buffer' },
   { 'hrsh7th/cmp-path' },
 }, lazy_opts)
-
--- LSP
-vim.api.nvim_create_autocmd('LspAttach', {
-  group = vim.api.nvim_create_augroup('user_lsp_attach', {clear = true}),
-  callback = function(event)
-    local opts = {buffer = event.buf}
-
-    print('ruby_lsp attached')
-
-    vim.keymap.set('n', 'gd', function() vim.lsp.buf.definition() end, opts)
-    vim.keymap.set('n', 'K', function() vim.lsp.buf.hover() end, opts)
-    vim.keymap.set('n', '<leader>vws', function() vim.lsp.buf.workspace_symbol() end, opts)
-    vim.keymap.set('n', '<leader>vd', function() vim.diagnostic.open_float() end, opts)
-    vim.keymap.set('n', '[d', function() vim.diagnostic.goto_next() end, opts)
-    vim.keymap.set('n', ']d', function() vim.diagnostic.goto_prev() end, opts)
-    vim.keymap.set('n', '<leader>vca', function() vim.lsp.buf.code_action() end, opts)
-    vim.keymap.set('n', '<leader>vrr', function() vim.lsp.buf.references() end, opts)
-    vim.keymap.set('n', '<leader>vrn', function() vim.lsp.buf.rename() end, opts)
-    vim.keymap.set('i', '<C-h>', function() vim.lsp.buf.signature_help() end, opts)
-  end,
-})
-
--- local lsp_capabilities = require('cmp_nvim_lsp').default_capabilities()
---
--- -- require('mason').setup({})
--- -- require('mason-lspconfig').setup({
--- --   ensure_installed = { 'ruby_lsp' }
--- -- })
---
--- require'lspconfig'.ruby_lsp.setup{}
---
--- local cmp = require('cmp')
--- local cmp_select = {behavior = cmp.SelectBehavior.Select}
 
