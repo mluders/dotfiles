@@ -4,6 +4,10 @@ export START_THE_SCHEDULER=YES
 export AUTO_MIGRATE_TEST_SCHEMA=1
 export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
 
+alias fs="foreman start"
+alias fsweb="foreman start all=0,web=1"
+alias fspack="foreman start all=0,shakapacker=1"
+alias fsother="foreman start all=1,web=0,shakapacker=0"
 alias ri-console="awsume appfolio-ri && aws --region=us-east-2 eks update-kubeconfig --name p1501 && kubectl afshell rentersinsurance --rails"
 alias tps-console="awsume appfolio-tps && aws --region=us-east-2 eks update-kubeconfig --name p1501 && kubectl afshell tps --rails"
 

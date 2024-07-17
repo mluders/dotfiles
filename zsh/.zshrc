@@ -83,11 +83,6 @@ tldiff() {
   git diff --name-only $1 HEAD | grep "test\.rb$" | xargs test_launcher
 }
 
-alias fs="foreman start"
-alias fsweb="foreman start all=0,web=1"
-alias fspack="foreman start all=0,webpacker=1"
-alias fsother="foreman start all=1,web=0,webpacker=0"
-
 [ -f "$HOME/.zshrc-local" ] && source $HOME/.zshrc-local
 [ -f "$HOME/.zshrc-appfolio" ] && source $HOME/.zshrc-appfolio
 
