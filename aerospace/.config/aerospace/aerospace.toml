@@ -45,3 +45,7 @@ alt-shift-o = 'move-node-to-workspace 4'
 cmd-h = []
 cmd-m = []
 
+[gaps]
+inner.horizontal = [{ monitor."dell" = 10 }, 0]
+outer.left = [{ monitor."dell" = 500 }, 0]
+outer.right = [{ monitor."dell" = 500 }, 0]
