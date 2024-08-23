@@ -1,0 +1,4 @@
+# Might need to `brew install less` if .lesskey file isn't recognized
+
+h forw-line
+l back-line
