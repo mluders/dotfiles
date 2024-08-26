@@ -1,5 +1,7 @@
 #! /usr/bin/env bash
 
+# xbar.metadata refresh=5s
+
 ################################################################################
 # This CLI tool simply outputs a small string indicating the status of your
 # unread Slack notifications. It is meant to be paired with XBar to display its
@@ -29,4 +31,6 @@ if [[ $unreads != "0" ]]; then
 fi
 
 echo "# $direct$indirect"
+# current_time=$(date +"%H:%M:%S")
+# echo "Current Time: $current_time"
 
