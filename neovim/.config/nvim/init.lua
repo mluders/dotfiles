@@ -28,9 +28,26 @@ vim.opt.expandtab = true
 vim.opt.hlsearch = false
 vim.opt.incsearch = true
 
--- Hide line numbers (they're handled by Comfy)
-vim.opt.number = false
+-- Line numbers
+vim.cmd('set signcolumn=yes:2')
 vim.opt.relativenumber = false
+vim.opt.number = false
+
+vim.api.nvim_create_user_command(
+  'Lines',
+  function(args)
+    if args.args == "comfy" then
+      vim.cmd('ComfyLineNumbers enable')
+      vim.opt.number = false
+    elseif args.args == "normal" then
+      vim.cmd('ComfyLineNumbers disable')
+      vim.opt.number = true
+    else
+      print("Invalid argument.")
+    end
+  end,
+  { nargs = 1 }
+)
 
 -- Sync clipboard between OS and Neovim.
 --  Remove this option if you want your OS clipboard to remain independent.
@@ -135,8 +152,6 @@ require("lazy").setup({
   { 'nvim-tree/nvim-web-devicons' },
   {
     'mluders/comfy-line-numbers.nvim',
-    dev = false,
-    enabled = true, -- false to disable plugin
     opts = {
       up_key = 'l',
       down_key = 'h',
@@ -342,4 +357,3 @@ require("lazy").setup({
   { 'hrsh7th/cmp-buffer' },
   { 'hrsh7th/cmp-path' },
 }, lazy_opts)
-
