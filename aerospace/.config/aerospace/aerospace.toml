@@ -27,9 +27,9 @@ cmd-h = []
 cmd-m = []
 
 [gaps]
-inner.horizontal = [{ monitor."dell" = 10 }, 0]
-outer.left = [{ monitor."dell" = 500 }, 0]
-outer.right = [{ monitor."dell" = 500 }, 0]
+inner.horizontal = [{ monitor."dell" = 10 }, { monitor."GNV34DB" = 10 }, 0]
+outer.left = [{ monitor."dell" = 500 }, { monitor."GNV34DB" = 500 }, 0]
+outer.right = [{ monitor."dell" = 500} , { monitor."GNV34DB" = 500 }, 0]
 
 [workspace-to-monitor-force-assignment]
 5 = 'built-in' # Zoom
