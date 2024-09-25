@@ -4,6 +4,8 @@ export START_THE_SCHEDULER=YES
 export AUTO_MIGRATE_TEST_SCHEMA=1
 export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
 
+export PATH="/opt/homebrew/opt/percona-server@5.7/bin:$PATH"
+
 alias fs="foreman start"
 alias fsweb="foreman start all=0,web=1"
 alias fspack="foreman start all=0,shakapacker=1"
