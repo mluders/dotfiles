@@ -25,10 +25,11 @@ require("lazy").setup({
   "hrsh7th/nvim-cmp",
   "hrsh7th/cmp-nvim-lsp",
   "hrsh7th/cmp-buffer",
+  { 'kana/vim-textobj-entire', dependencies = { 'kana/vim-textobj-user' } },
+  { 'beloglazov/vim-textobj-quotes', dependencies = { 'kana/vim-textobj-user' } },
   { "j-hui/fidget.nvim", opts = {} },
   -- { 'hrsh7th/cmp-path' },
   { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
-  { 'kana/vim-textobj-entire', dependencies = { 'kana/vim-textobj-user' } },
   {
     'rebelot/kanagawa.nvim',
     config = function() vim.cmd("colorscheme kanagawa") end

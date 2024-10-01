@@ -12,8 +12,8 @@ vim.keymap.set("v", "L", ":m '<-2<CR>gv=gv")
 vim.keymap.set("v", "H", ":m '>+1<CR>gv=gv")
 
 -- Remap semicolon to colon
-vim.keymap.set('n', ';', ':', { silent = false, noremap = true })
-vim.keymap.set('n', ':', ';', { silent = false, noremap = true })
+vim.keymap.set({ 'n', 'v' }, ';', ':', { silent = false, noremap = true })
+vim.keymap.set({ 'n', 'v' }, ':', ';', { silent = false, noremap = true })
 
 -- Shortcut to open the explorer
 vim.keymap.set("n", "<leader>b", vim.cmd.Ex)
@@ -31,4 +31,4 @@ vim.keymap.set({ "n", "v" }, "<leader>p", [["0p]])
 vim.keymap.set({ "n", "v" }, "<leader>P", [["0P]])
 
 -- Copy file path
-vim.keymap.set("n", "<leader>c", "<cmd>let @+=@%<CR>", { silent = true })
+vim.keymap.set("n", "<leader>c", "<cmd>let @+=@%<CR>")

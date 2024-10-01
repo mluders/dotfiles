@@ -2,14 +2,14 @@ local builtin = require('telescope.builtin')
 local lga_actions = require("telescope-live-grep-args.actions")
 
 vim.keymap.set(
-'n',
-'<leader>f',
-function ()
-  builtin.find_files {
-    find_command = { 'rg', '--files', '--iglob', '!.git', '--hidden' }
-  }
-end,
-{}
+  'n',
+  '<leader>f',
+  function ()
+    builtin.find_files {
+      find_command = { 'rg', '--files', '--hidden' }
+    }
+  end,
+  {}
 )
 
 vim.keymap.set('n', '<C-p>', builtin.git_files, {})
@@ -29,8 +29,7 @@ require("telescope").setup{
         ["<esc>"] = actions.close,
         ["<C-k>"] = lga_actions.quote_prompt(),
         ["<C-i>"] = lga_actions.quote_prompt({ postfix = " --iglob " }),
-        -- freeze the current list and start a fuzzy search in the frozen list
-        ["<C-space>"] = actions.to_fuzzy_refine,
+        ["<C-space>"] = actions.to_fuzzy_refine, -- freeze the current list and start a fuzzy search in the frozen list
         ["<C-n>"] = actions.cycle_history_next,
         ["<C-p>"] = actions.cycle_history_prev,
       },
