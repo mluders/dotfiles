@@ -70,6 +70,12 @@ require("lazy").setup({
     dependencies = { "nvim-lua/plenary.nvim" },
     name = "harpoon",
     config = function() require("plugin/harpoon") end
+  },
+  {
+    "ibhagwan/fzf-lua",
+    -- optional for icon support
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    config = function() require("plugin/fzf-lua") end
   }
 })
 
