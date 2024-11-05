@@ -1,5 +1,6 @@
 require('fzf-lua').setup({
   files = {
+    -- TODO: Define cmd below using fd alias
     cmd = [[
       if [ -f .fd-priority ]; then
         # Prioritize directories defined in .fd-priority
@@ -34,6 +35,15 @@ require('fzf-lua').setup({
   },
 })
 
-vim.keymap.set('n', '<leader>f', require('fzf-lua').files, { desc = "Fzf Files" })
-vim.keymap.set('n', '<leader>g', require('fzf-lua').grep, { desc = "Fzf Grep" })
-vim.keymap.set('n', '<leader>r', require('fzf-lua').resume, { desc = "Fzf Grep" })
+vim.keymap.set('n', '<leader>f', require('fzf-lua').files)
+vim.keymap.set('n', '<leader>g', require('fzf-lua').grep)
+vim.keymap.set('n', '<leader>r', require('fzf-lua').resume)
+vim.keymap.set('n', '<leader>t', function()
+  if list_ft_commands then
+    list_ft_commands()
+  else
+    print("No commands for this file")
+  end
+end)
+-- vim.keymap.set('n', '<leader>;', require('fzf-lua').command_history, { desc = "Fzf Grep" })
+-- vim.keymap.set('n', '<leader>z', ":FzfLua<CR>", { desc = "Fzf Grep" })
