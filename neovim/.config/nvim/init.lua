@@ -65,7 +65,6 @@ require("lazy").setup({
     dependencies = {
       'nvim-lua/plenary.nvim',
       'debugloop/telescope-undo.nvim',
-      'BurntSushi/ripgrep',
       'nvim-telescope/telescope-fzf-native.nvim',
       { "nvim-telescope/telescope-live-grep-args.nvim", version = "^1.0.0" }
     },
