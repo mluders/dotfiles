@@ -1,5 +1,5 @@
-require("set")
-require("map")
+require("miles/set")
+require("miles/map")
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
@@ -15,28 +15,22 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
-  "tpope/vim-sleuth", -- Detect tabstop and shiftwidth automatically
+  {
+    'rebelot/kanagawa.nvim',
+    priority = 1000, -- load this before all the other start plugins
+    lazy = false,
+    config = function()
+      vim.cmd("colorscheme kanagawa")
+    end
+  },
+  "tpope/vim-sleuth", -- detect tabstop and shiftwidth automatically
   "tpope/vim-fugitive",
   "tpope/vim-rhubarb",
   "nvim-tree/nvim-web-devicons",
-  "neovim/nvim-lspconfig",
-  {
-    "hrsh7th/nvim-cmp",
-    dependencies = {
-      "hrsh7th/cmp-buffer",
-      "hrsh7th/cmp-nvim-lsp",
-      "hrsh7th/cmp-path",
-    },
-    config = function() require("plugin/nvim-cmp") end
-  },
   { 'kana/vim-textobj-entire', dependencies = { 'kana/vim-textobj-user' } },
   { 'beloglazov/vim-textobj-quotes', dependencies = { 'kana/vim-textobj-user' } },
   { "j-hui/fidget.nvim", opts = {} },
   { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
-  {
-    'rebelot/kanagawa.nvim',
-    config = function() vim.cmd("colorscheme kanagawa") end
-  },
   {
     'mluders/comfy-line-numbers.nvim',
     opts = {
@@ -52,6 +46,21 @@ require("lazy").setup({
     },
   },
   {
+    "neovim/nvim-lspconfig",
+    dependencies = {
+      "hrsh7th/cmp-nvim-lsp"
+    },
+    config = function() require("miles/lsp") end
+  },
+  {
+    "hrsh7th/nvim-cmp",
+    dependencies = {
+      "hrsh7th/cmp-buffer",
+      "hrsh7th/cmp-path",
+    },
+    config = function() require("miles/cmp") end
+  },
+  {
     'nvim-telescope/telescope.nvim', tag = '0.1.6',
     dependencies = {
       'nvim-lua/plenary.nvim',
@@ -60,26 +69,24 @@ require("lazy").setup({
       'nvim-telescope/telescope-fzf-native.nvim',
       { "nvim-telescope/telescope-live-grep-args.nvim", version = "^1.0.0" }
     },
-    config = function() require("plugin/telescope") end
+    config = function() require("miles/telescope") end
   },
   {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
-    config = function() require("plugin/treesitter") end
+    config = function() require("miles/treesitter") end
   },
   {
     "ThePrimeagen/harpoon",
     branch = "harpoon2",
     dependencies = { "nvim-lua/plenary.nvim" },
     name = "harpoon",
-    config = function() require("plugin/harpoon") end
+    config = function() require("miles/harpoon") end
   },
   {
     "ibhagwan/fzf-lua",
     -- optional for icon support
     dependencies = { "nvim-tree/nvim-web-devicons" },
-    config = function() require("plugin/fzf-lua") end
+    config = function() require("miles/fzf-lua") end
   }
 })
-
-require("lsp")
