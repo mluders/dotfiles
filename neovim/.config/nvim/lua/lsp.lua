@@ -33,14 +33,6 @@ local default_setup = function(server)
   })
 end
 
-require('mason').setup({})
-require('mason-lspconfig').setup({
-  ensure_installed = {},
-  handlers = {
-    default_setup,
-  },
-})
-
 local cmp = require('cmp')
 
 cmp.setup({
