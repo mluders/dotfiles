@@ -1,19 +1,26 @@
--- vim.diagnostic.config({
---   signs = { priority = 1 }
--- })
+-- Good article for understand how LSP functionality works
+-- https://dx13.co.uk/articles/2023/04/24/neovim-lsp-without-plugins/
 
+-- TODO: Make comfy lines play nicely with LSP and diagnostic signs
+-- vim.diagnostic.config({ signs = { priority = 1 }})
 vim.diagnostic.disable()
+
+require('lspconfig').ruby_lsp.setup({
+  capabilities = require('cmp_nvim_lsp').default_capabilities()
+})
 
 vim.api.nvim_create_autocmd('LspAttach', {
   desc = 'LSP actions',
   callback = function(event)
-    local opts = {buffer = event.buf}
+    local opts = { buffer = event.buf }
 
-    -- these will be buffer-local keybindings
-    -- because they only work if you have an active language server
+    -- These will be buffer-local keybindings because they only work if you
+    -- have an active language server
 
-    -- vim.keymap.set('n', 'K', '<cmd>lua vim.lsp.buf.hover()<cr>', opts)
+    -- TODO: Do these keymaps need to be cleaned up using LspDetach?
+
     vim.keymap.set('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<cr>', opts)
+    -- vim.keymap.set('n', 'K', '<cmd>lua vim.lsp.buf.hover()<cr>', opts)
     -- vim.keymap.set('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<cr>', opts)
     -- vim.keymap.set('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<cr>', opts)
     -- vim.keymap.set('n', 'go', '<cmd>lua vim.lsp.buf.type_definition()<cr>', opts)
@@ -23,32 +30,4 @@ vim.api.nvim_create_autocmd('LspAttach', {
     -- vim.keymap.set({'n', 'x'}, '<F3>', '<cmd>lua vim.lsp.buf.format({async = true})<cr>', opts)
     -- vim.keymap.set('n', '<F4>', '<cmd>lua vim.lsp.buf.code_action()<cr>', opts)
   end
-})
-
-local lsp_capabilities = require('cmp_nvim_lsp').default_capabilities()
-
-local default_setup = function(server)
-  require('lspconfig')[server].setup({
-    capabilities = lsp_capabilities,
-  })
-end
-
-local cmp = require('cmp')
-
-cmp.setup({
-  sources = {
-    {name = 'nvim_lsp'},
-  },
-  mapping = cmp.mapping.preset.insert({
-    -- Enter key confirms completion item
-    ['<CR>'] = cmp.mapping.confirm({select = false}),
-
-    -- Ctrl + space triggers completion menu
-    ['<C-Space>'] = cmp.mapping.complete(),
-  }),
-  snippet = {
-    expand = function(args)
-      require('luasnip').lsp_expand(args.body)
-    end,
-  },
 })

@@ -20,13 +20,18 @@ require("lazy").setup({
   "tpope/vim-rhubarb",
   "nvim-tree/nvim-web-devicons",
   "neovim/nvim-lspconfig",
-  "hrsh7th/nvim-cmp",
-  "hrsh7th/cmp-nvim-lsp",
-  "hrsh7th/cmp-buffer",
+  {
+    "hrsh7th/nvim-cmp",
+    dependencies = {
+      "hrsh7th/cmp-buffer",
+      "hrsh7th/cmp-nvim-lsp",
+      "hrsh7th/cmp-path",
+    },
+    config = function() require("plugin/nvim-cmp") end
+  },
   { 'kana/vim-textobj-entire', dependencies = { 'kana/vim-textobj-user' } },
   { 'beloglazov/vim-textobj-quotes', dependencies = { 'kana/vim-textobj-user' } },
   { "j-hui/fidget.nvim", opts = {} },
-  -- { 'hrsh7th/cmp-path' },
   { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
   {
     'rebelot/kanagawa.nvim',
