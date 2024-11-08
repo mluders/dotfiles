@@ -23,10 +23,17 @@ require("lazy").setup({
       vim.cmd("colorscheme kanagawa")
     end
   },
+  "nvim-tree/nvim-web-devicons",
   "tpope/vim-sleuth", -- detect tabstop and shiftwidth automatically
   "tpope/vim-fugitive",
   "tpope/vim-rhubarb",
-  "nvim-tree/nvim-web-devicons",
+  {
+    -- TODO: This is installed purely for "alternate file." Find a leaner approach.
+    "tpope/vim-rails",
+    config = function ()
+      vim.keymap.set("n", "ga", function() vim.cmd('A') end)
+    end
+  },
   { 'kana/vim-textobj-entire', dependencies = { 'kana/vim-textobj-user' } },
   { 'beloglazov/vim-textobj-quotes', dependencies = { 'kana/vim-textobj-user' } },
   { "j-hui/fidget.nvim", opts = {} },
