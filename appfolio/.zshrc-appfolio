@@ -13,4 +13,4 @@ alias fsother="foreman start all=1,web=0,shakapacker=0"
 alias ri-console="awsume appfolio-ri && aws --region=us-east-2 eks update-kubeconfig --name p1501 && kubectl afshell rentersinsurance --rails"
 alias tps-console="awsume appfolio-tps && aws --region=us-east-2 eks update-kubeconfig --name p1501 && kubectl afshell tps --rails"
 
-eval $(otto autocomplete script zsh)
+# eval $(otto autocomplete script zsh)
