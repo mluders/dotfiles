@@ -1,12 +1,5 @@
 export GPG_TTY=$(tty)
 
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
-
 # Terminal
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
@@ -22,21 +15,34 @@ export PATH="/opt/homebrew/bin:$PATH"
 
 # Zsh
 export CASE_SENSITIVE="false" # Use case-insensitive completion.
-export ZSH="$HOME/.oh-my-zsh"
-export ZSH_THEME="powerlevel10k/powerlevel10k"
-plugins=(asdf)
-source $ZSH/oh-my-zsh.sh
-alias zshrc="code ~/.zshrc"
 alias vi='nvim'
 alias vim='nvim'
 alias vv='nvim .'
 alias vf='source sessionizer 1'
 alias f='source sessionizer'
 
+# Pure zsh prompt
+fpath+=("$(brew --prefix)/share/zsh/site-functions")
+autoload -U promptinit; promptinit
+prompt pure
+
 # fzf
 export ESCDELAY=0 # Remove escape key delay
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 eval "$(fzf --zsh)" # fzf shell integration
+
+# Up arrow history completion
+autoload -U up-line-or-beginning-search
+autoload -U down-line-or-beginning-search
+zle -N up-line-or-beginning-search
+zle -N down-line-or-beginning-search
+bindkey "^[[A" up-line-or-beginning-search # Up
+bindkey "^[[B" down-line-or-beginning-search # Down
+
+# asdf
+. "$HOME/.asdf/asdf.sh"
+fpath=(${ASDF_DIR}/completions $fpath) # append completions to fpath
+autoload -Uz compinit && compinit # initialise completions with ZSH's compinit
 
 # Git
 alias g="git"
@@ -85,7 +91,3 @@ tldiff() {
 
 [ -f "$HOME/.zshrc-local" ] && source $HOME/.zshrc-local
 [ -f "$HOME/.zshrc-appfolio" ] && source $HOME/.zshrc-appfolio
-
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
