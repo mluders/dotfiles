@@ -1,3 +1,0 @@
-.git
-!.env*
-# TODO: Figure out how to include !.telescope-paths
