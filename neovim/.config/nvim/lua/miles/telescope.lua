@@ -1,108 +1,115 @@
--- local TELESCOPE_PATH_FILE = '.telescope-paths'
--- local limit_to_telescope_paths = true
---
--- local find_files = function()
---   local function file_exists(path)
---     local stat = vim.loop.fs_stat(path)
---     return stat and stat.type == 'file' -- Returns true if the file exists
---   end
---
---   -- Function to read file paths from a specified file into a table
---   local function read_file_paths(filename)
---     local paths = {}  -- Table to hold the file paths
---
---     -- Open the file for reading
---     local file = io.open(filename, "r")
---     if not file then
---       print("Could not open file: " .. filename)
---       return nil  -- Return nil if the file cannot be opened
---     end
---
---     -- Read each line and insert it into the table
---     for line in file:lines() do
---       if line and line ~= "" then  -- Check if the line is not empty
---         table.insert(paths, line)
---       end
---     end
---
---     file:close()  -- Close the file after reading
---     return paths  -- Return the table containing file paths
---   end
---
---   if limit_to_telescope_paths and file_exists(TELESCOPE_PATH_FILE) then
---     local file_paths = read_file_paths(TELESCOPE_PATH_FILE)
---     table.insert(file_paths, TELESCOPE_PATH_FILE)
---
---     require("telescope.builtin").find_files({
---       prompt_title = "Find Files (Telescope Paths)",
---       hidden = true,
---       search_dirs = file_paths,
---     })
---   else
---     require("telescope.builtin").find_files({
---       prompt_title = "Find Files (All)",
---       hidden = true,
---     })
---   end
--- end
---
--- local actions = require("telescope.actions")
--- local lga_actions = require("telescope-live-grep-args.actions")
---
--- require("telescope").setup{
---   defaults = {
---     mappings = {
---       i = {
---         -- ["<esc>"] = actions.close,
---         -- ["<C-k>"] = lga_actions.quote_prompt(),
---         -- ["<C-i>"] = lga_actions.quote_prompt({ postfix = " --iglob " }),
---         -- ["<C-space>"] = actions.to_fuzzy_refine, -- freeze the current list and start a fuzzy search in the frozen list
---         -- ["<C-n>"] = actions.cycle_history_next,
---         -- ["<C-p>"] = actions.cycle_history_prev,
---       },
---     },
---   },
---   pickers = {
---     find_files = {
---       mappings = {
---         i = {
---           ["<esc>"] = actions.close,
---           ["<C-g>"] = function()
---             limit_to_telescope_paths = not limit_to_telescope_paths
---             find_files()
---           end
---         }
---       }
---     }
---   },
---   extensions = {
---     undo = {
---       -- telescope-undo.nvim config, see below
---     },
---     fzf = {
---       case_mode = "ignore_case",        -- or "ignore_case" or "respect_case"
---     }
---     -- other extensions:
---     -- file_browser = { ... }
---   },
--- }
---
--- require("telescope").load_extension("undo")
--- vim.keymap.set("n", "<leader>u", "<cmd>Telescope undo<cr>")
---
--- require('telescope').load_extension('fzf')
--- require('telescope').load_extension('live_grep_args')
---
--- vim.keymap.set("n", "<leader>f", function()
---   limit_to_telescope_paths = true
---   find_files()
--- end, { desc = "[f]iles" })
---
--- vim.keymap.set('n', '<leader>r', require('telescope.builtin').resume, {
---   noremap = true,
---   silent = true,
---   desc = "Resume",
--- })
---
+local TELESCOPE_PATH_FILE = '.telescope-paths'
+local limit_to_telescope_paths = true
+
+local find_files = function()
+  local function file_exists(path)
+    local stat = vim.loop.fs_stat(path)
+    return stat and stat.type == 'file' -- Returns true if the file exists
+  end
+
+  -- Function to read file paths from a specified file into a table
+  local function read_file_paths(filename)
+    local paths = {}  -- Table to hold the file paths
+
+    -- Open the file for reading
+    local file = io.open(filename, "r")
+    if not file then
+      print("Could not open file: " .. filename)
+      return nil  -- Return nil if the file cannot be opened
+    end
+
+    -- Read each line and insert it into the table
+    for line in file:lines() do
+      if line and line ~= "" then  -- Check if the line is not empty
+        table.insert(paths, line)
+      end
+    end
+
+    file:close()  -- Close the file after reading
+    return paths  -- Return the table containing file paths
+  end
+
+  if limit_to_telescope_paths and file_exists(TELESCOPE_PATH_FILE) then
+    local file_paths = read_file_paths(TELESCOPE_PATH_FILE)
+    table.insert(file_paths, TELESCOPE_PATH_FILE)
+
+    require("telescope.builtin").find_files({
+      prompt_title = "Find Files (Telescope Paths)",
+      hidden = true,
+      search_dirs = file_paths,
+    })
+  else
+    require("telescope.builtin").find_files({
+      prompt_title = "Find Files (All)",
+      hidden = true,
+    })
+  end
+end
+
+local actions = require("telescope.actions")
+local lga_actions = require("telescope-live-grep-args.actions")
+
+require("telescope").setup{
+  defaults = {
+    mappings = {
+      i = {
+        -- ["<esc>"] = actions.close,
+        -- ["<C-k>"] = lga_actions.quote_prompt(),
+        -- ["<C-i>"] = lga_actions.quote_prompt({ postfix = " --iglob " }),
+        -- ["<C-space>"] = actions.to_fuzzy_refine, -- freeze the current list and start a fuzzy search in the frozen list
+        -- ["<C-n>"] = actions.cycle_history_next,
+        -- ["<C-p>"] = actions.cycle_history_prev,
+      },
+    },
+  },
+  pickers = {
+    find_files = {
+      mappings = {
+        i = {
+          ["<esc>"] = actions.close,
+          -- ["<C-g>"] = function()
+          --   -- limit_to_telescope_paths = not limit_to_telescope_paths
+          --   find_files()
+          -- end
+        }
+      },
+      find_command = { 'rg', '--files', '--hidden' }
+      -- file_ignore_patterns = { 'tenancy' }
+    }
+  },
+  extensions = {
+    undo = {
+      -- telescope-undo.nvim config, see below
+    },
+    fzf = {
+      case_mode = "ignore_case",        -- or "ignore_case" or "respect_case"
+    }
+    -- other extensions:
+    -- file_browser = { ... }
+  },
+}
+
+require("telescope").load_extension("undo")
+vim.keymap.set("n", "<leader>u", "<cmd>Telescope undo<cr>")
+
+require('telescope').load_extension('fzf')
+require('telescope').load_extension('live_grep_args')
+
+vim.keymap.set("n", "<leader>f", function()
+  -- limit_to_telescope_paths = true
+  -- find_files()
+  require("telescope.builtin").find_files({
+    prompt_title = "Find Files",
+    hidden = true,
+    search_dirs = file_paths,
+  })
+end, { desc = "[f]iles" })
+
+vim.keymap.set('n', '<leader>r', require('telescope.builtin').resume, {
+  noremap = true,
+  silent = true,
+  desc = "Resume",
+})
+
 -- vim.keymap.set('n', '<C-p>', require('telescope.builtin').git_files, {})
 -- vim.keymap.set('n', '<leader>g', require('telescope').extensions.live_grep_args.live_grep_args, {})
