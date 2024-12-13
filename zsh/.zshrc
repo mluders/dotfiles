@@ -1,4 +1,7 @@
+setopt share_history
+
 export GPG_TTY=$(tty)
+
 
 # Terminal
 export LANG=en_US.UTF-8
