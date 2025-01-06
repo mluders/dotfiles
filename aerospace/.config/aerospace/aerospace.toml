@@ -49,6 +49,11 @@ run = ['move-node-to-workspace 1']
 if.app-id = 'com.google.Chrome'
 run = ['move-node-to-workspace 2']
 
+# Firefox
+[[on-window-detected]]
+if.app-id = 'org.mozilla.firefox'
+run = ['move-node-to-workspace 2']
+
 # VSCode
 [[on-window-detected]]
 if.app-id = 'com.microsoft.VSCode'
