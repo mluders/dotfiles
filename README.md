@@ -22,3 +22,8 @@ make
 * Better way to run tests so I don't lose the terminal window
 * ciw should use treesitter (in a string, . should be part of the word, but should be treated separately in a function)
 * project specific file to store list of "quick" files (immediately accessible from telescope without waiting)
+* fold/unfold list structures
+* select to end of line (easier than g_)
+* copy paste (especially pasting over words with viw)
+* LLM
+     - Automatic commit messages
