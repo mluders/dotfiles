@@ -2,7 +2,7 @@
 -- https://dx13.co.uk/articles/2023/04/24/neovim-lsp-without-plugins/
 
 -- Make comfy lines play nicely with LSP and diagnostic signs
-vim.diagnostic.config({ signs = { priority = 11 }})
+-- vim.diagnostic.config({ signs = { priority = 11 }})
 -- vim.diagnostic.disable()
 -- function print_current_line_signs()
 --   local current_line = vim.api.nvim_win_get_cursor(0)[1]
