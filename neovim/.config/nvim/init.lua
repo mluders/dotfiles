@@ -45,6 +45,7 @@ require("lazy").setup({
         '62', '63', '64', '65'
       }
     },
+    -- dir = "/Users/miles/personal/comfy-line-numbers.nvim"
   },
   {
     "neovim/nvim-lspconfig",

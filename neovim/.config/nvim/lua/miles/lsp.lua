@@ -1,9 +1,14 @@
 -- Good article for understand how LSP functionality works
 -- https://dx13.co.uk/articles/2023/04/24/neovim-lsp-without-plugins/
 
--- TODO: Make comfy lines play nicely with LSP and diagnostic signs
--- vim.diagnostic.config({ signs = { priority = 1 }})
+-- Make comfy lines play nicely with LSP and diagnostic signs
+vim.diagnostic.config({ signs = { priority = 11 }})
 -- vim.diagnostic.disable()
+-- function print_current_line_signs()
+--   local current_line = vim.api.nvim_win_get_cursor(0)[1]
+--   local current_line_signs = vim.fn.sign_getplaced('%', {group = '*', lnum = current_line})
+--   print(vim.inspect(current_line_signs, {indent = '  ', newline = '\n  '}))
+-- end
 
 vim.api.nvim_create_autocmd('LspAttach', {
   desc = 'LSP actions',
