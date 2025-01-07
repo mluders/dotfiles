@@ -3,11 +3,7 @@
 
 -- TODO: Make comfy lines play nicely with LSP and diagnostic signs
 -- vim.diagnostic.config({ signs = { priority = 1 }})
-vim.diagnostic.disable()
-
-require('lspconfig').ruby_lsp.setup({
-  capabilities = require('cmp_nvim_lsp').default_capabilities()
-})
+-- vim.diagnostic.disable()
 
 vim.api.nvim_create_autocmd('LspAttach', {
   desc = 'LSP actions',
