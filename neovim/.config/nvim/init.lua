@@ -15,22 +15,23 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
-  {
-    'rebelot/kanagawa.nvim',
-    priority = 1000, -- load this before all the other start plugins
-    lazy = false,
-    config = function()
-      vim.cmd("colorscheme kanagawa")
-    end
-  },
-  "nvim-tree/nvim-web-devicons",
-  "tpope/vim-sleuth", -- detect tabstop and shiftwidth automatically
-  "tpope/vim-fugitive",
-  "tpope/vim-rhubarb",
-  { 'kana/vim-textobj-entire', dependencies = { 'kana/vim-textobj-user' } },
   { 'beloglazov/vim-textobj-quotes', dependencies = { 'kana/vim-textobj-user' } },
+  {
+    "hrsh7th/nvim-cmp",
+    dependencies = {
+      "hrsh7th/cmp-buffer",
+      "hrsh7th/cmp-path",
+    },
+    config = function() require("miles/cmp") end
+  },
+  {
+    "ibhagwan/fzf-lua",
+    -- optional for icon support
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    config = function() require("miles/fzf-lua") end
+  },
   { "j-hui/fidget.nvim", opts = {} },
-  { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
+  { 'kana/vim-textobj-entire', dependencies = { 'kana/vim-textobj-user' } },
   {
     'mluders/comfy-line-numbers.nvim',
     opts = {
@@ -52,14 +53,7 @@ require("lazy").setup({
     },
     config = function() require("miles/lsp") end
   },
-  {
-    "hrsh7th/nvim-cmp",
-    dependencies = {
-      "hrsh7th/cmp-buffer",
-      "hrsh7th/cmp-path",
-    },
-    config = function() require("miles/cmp") end
-  },
+  { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
   {
     'nvim-telescope/telescope.nvim', tag = '0.1.6',
     dependencies = {
@@ -70,10 +64,19 @@ require("lazy").setup({
     },
     config = function() require("miles/telescope") end
   },
+  "nvim-tree/nvim-web-devicons",
   {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
     config = function() require("miles/treesitter") end
+  },
+  {
+    'rebelot/kanagawa.nvim',
+    priority = 1000, -- load this before all the other start plugins
+    lazy = false,
+    config = function()
+      vim.cmd("colorscheme kanagawa")
+    end
   },
   {
     "ThePrimeagen/harpoon",
@@ -82,10 +85,7 @@ require("lazy").setup({
     name = "harpoon",
     config = function() require("miles/harpoon") end
   },
-  {
-    "ibhagwan/fzf-lua",
-    -- optional for icon support
-    dependencies = { "nvim-tree/nvim-web-devicons" },
-    config = function() require("miles/fzf-lua") end
-  }
+  "tpope/vim-fugitive",
+  "tpope/vim-rhubarb",
+  "tpope/vim-sleuth", -- detect tabstop and shiftwidth automatically
 })
