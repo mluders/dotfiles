@@ -20,33 +20,8 @@ vim.opt.incsearch = true
 
 -- Line numbers
 vim.opt.signcolumn = "yes"
-vim.opt.relativenumber = false
-vim.opt.number = false
-
--- Make sure relative numbers are enabled
 vim.opt.number = true
-vim.opt.relativenumber = true
--- vim.opt.statuscolumn = "%@SignCb@%s%=%T%@NumCb@%l│%T"
-vim.cmd([[
-function! GetLabel(n)
-  let labels = [
-  \ '1', '2', '3', '4', '5',
-  \ '11', '12', '13', '14', '15',
-  \ '21', '22', '23', '24', '25',
-  \ '31', '32', '33', '34', '35',
-  \ '41', '42', '43', '44', '45',
-  \ '51', '52', '53', '54', '55'
-  \ ]
-
-  if a:n > 0 && a:n <= len(labels)
-    return labels[a:n - 1]
-  else
-    return a:n
-  endif
-endfunction
-
-  let &stc='%=%s%=%{GetLabel(v:relnum)} '
-]])
+vim.opt.cursorline = true
 
 -- Sync clipboard between OS and Neovim.
 vim.opt.clipboard = 'unnamedplus'
