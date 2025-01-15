@@ -21,6 +21,7 @@ require("lazy").setup({
     dependencies = {
       "hrsh7th/cmp-buffer",
       "hrsh7th/cmp-path",
+      "hrsh7th/cmp-nvim-lsp",
     },
     config = function() require("miles/cmp") end
   },
@@ -46,13 +47,6 @@ require("lazy").setup({
       }
     },
     -- dir = "/Users/miles.luders/personal/comfy-line-numbers.nvim",
-  },
-  {
-    "neovim/nvim-lspconfig",
-    dependencies = {
-      "hrsh7th/cmp-nvim-lsp"
-    },
-    config = function() require("miles/lsp") end
   },
   { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
   {
@@ -90,3 +84,5 @@ require("lazy").setup({
   "tpope/vim-rhubarb",
   "tpope/vim-sleuth", -- detect tabstop and shiftwidth automatically
 })
+
+require("miles/lsp")

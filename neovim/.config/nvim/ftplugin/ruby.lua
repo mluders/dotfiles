@@ -63,9 +63,6 @@ vim.keymap.set("n", "ga", open_alt_file)
 --   })
 -- end
 
-require('lspconfig').ruby_lsp.setup({
-  capabilities = require('cmp_nvim_lsp').default_capabilities()
-})
 
 -- vim.lsp.start {
 --   name = "rubocop",
