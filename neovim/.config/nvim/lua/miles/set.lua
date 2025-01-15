@@ -47,22 +47,6 @@ vim.api.nvim_create_autocmd({ 'TermOpen' }, {
   command = "startinsert"
 })
 
-vim.api.nvim_create_user_command(
-  'Lines',
-  function(args)
-    if args.args == "comfy" then
-      vim.cmd('ComfyLineNumbers enable')
-      vim.opt.number = false
-    elseif args.args == "normal" then
-      vim.cmd('ComfyLineNumbers disable')
-      vim.opt.number = true
-    else
-      print("Invalid argument.")
-    end
-  end,
-  { nargs = 1 }
-)
-
 vim.filetype.add({
   pattern = {
     ['.*/.*%.jack'] = 'jack',
