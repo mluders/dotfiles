@@ -47,6 +47,9 @@ bindkey "^[[B" down-line-or-beginning-search # Down
 fpath=(${ASDF_DIR}/completions $fpath) # append completions to fpath
 autoload -Uz compinit && compinit # initialise completions with ZSH's compinit
 
+# General
+alias ll="ls -la"
+
 # Git
 alias g="git"
 alias ga="git add"
