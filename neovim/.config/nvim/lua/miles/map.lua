@@ -32,3 +32,7 @@ vim.keymap.set({ "n", "v" }, "<leader>P", [["0P]])
 
 -- Copy file path
 vim.keymap.set("n", "<leader>c", "<cmd>let @+=@%<CR>")
+
+-- Faster way to add empty lines
+vim.keymap.set('n', '<CR>', 'o<Esc>')
+vim.keymap.set('n', '<S-CR>', 'O<Esc>')
