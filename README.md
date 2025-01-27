@@ -27,3 +27,4 @@ make
 * copy paste (especially pasting over words with viw)
 * LLM
      - Automatic commit messages
+* g'aw to add quotes around word
