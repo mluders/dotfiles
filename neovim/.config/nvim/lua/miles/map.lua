@@ -36,3 +36,12 @@ vim.keymap.set("n", "<leader>c", "<cmd>let @+=@%<CR>")
 -- Faster way to add empty lines
 vim.keymap.set('n', '<CR>', 'o<Esc>')
 vim.keymap.set('n', '<S-CR>', 'O<Esc>')
+
+-- When I `dd` a blank line, I don't want to copy it
+vim.keymap.set("n", "dd", function()
+  if vim.trim(vim.fn.getline(".")) == "" then
+    return '"0dd'
+  else
+    return 'dd'
+  end
+end, { expr = true, noremap = true })
