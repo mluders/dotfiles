@@ -98,6 +98,21 @@ require("lazy").setup({
   "tpope/vim-fugitive",
   "tpope/vim-rhubarb",
   "tpope/vim-sleuth", -- detect tabstop and shiftwidth automatically
+  {
+    "zbirenbaum/copilot.lua",
+    config = function()
+      require("copilot").setup({
+        suggestion = { enabled = false },
+        panel = { enabled = false },
+      })
+    end,
+  },
+  {
+    "zbirenbaum/copilot-cmp",
+    config = function ()
+      require("copilot_cmp").setup()
+    end
+  }
 })
 
 require("miles/lsp")
