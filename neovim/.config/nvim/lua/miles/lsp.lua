@@ -23,3 +23,4 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
 vim.lsp.enable('luals')
 vim.lsp.enable('ruby_lsp')
+vim.lsp.enable('ts_ls')
