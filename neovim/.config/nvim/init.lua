@@ -115,6 +115,16 @@ require("lazy").setup({
   "tpope/vim-rhubarb",
   "tpope/vim-sleuth", -- detect tabstop and shiftwidth automatically
   {
+    'Wansmer/treesj',
+    config = function()
+      require('treesj').setup({
+        use_default_keymaps = false,
+      })
+
+      vim.keymap.set('n', '<leader>m', require('treesj').toggle)
+    end,
+  },
+  {
     "zbirenbaum/copilot.lua",
     config = function()
       require("copilot").setup({
