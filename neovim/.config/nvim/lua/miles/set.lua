@@ -23,6 +23,9 @@ vim.opt.signcolumn = "yes"
 vim.opt.number = true
 vim.opt.cursorline = true
 
+-- Play nicely with lualine
+vim.opt.showmode = false
+
 -- Sync clipboard between OS and Neovim.
 vim.opt.clipboard = 'unnamedplus'
 
