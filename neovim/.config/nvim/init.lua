@@ -15,7 +15,10 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
-  { 'beloglazov/vim-textobj-quotes', dependencies = { 'kana/vim-textobj-user' } },
+  {
+    'beloglazov/vim-textobj-quotes',
+    dependencies = { 'kana/vim-textobj-user' },
+  },
   {
     "hrsh7th/nvim-cmp",
     dependencies = {
@@ -31,8 +34,14 @@ require("lazy").setup({
     dependencies = { "nvim-tree/nvim-web-devicons" },
     config = function() require("miles/fzf-lua") end
   },
-  { "j-hui/fidget.nvim", opts = {} },
-  { 'kana/vim-textobj-entire', dependencies = { 'kana/vim-textobj-user' } },
+  {
+    "j-hui/fidget.nvim",
+    opts = {},
+  },
+  {
+    'kana/vim-textobj-entire',
+    dependencies = { 'kana/vim-textobj-user' },
+  },
   {
     "kylechui/nvim-surround",
     version = "*", -- Use for stability; omit to use `main` branch for the latest features
@@ -69,19 +78,20 @@ require("lazy").setup({
     config = function()
       require('lualine').setup({
         sections = {
-          lualine_a = {'mode'},
-          lualine_b = {'branch', 'diff', 'diagnostics'},
-          lualine_c = {'filename'},
-          lualine_x = {'filetype'},
-          lualine_y = {'progress'},
-          lualine_z = {'location'}
+          lualine_a = { 'mode' },
+          lualine_b = { 'branch', 'diff', 'diagnostics' },
+          lualine_c = { 'filename' },
+          lualine_x = { 'filetype' },
+          lualine_y = { 'progress' },
+          lualine_z = { 'location' }
         },
       })
     end
   },
   { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
   {
-    'nvim-telescope/telescope.nvim', tag = '0.1.6',
+    'nvim-telescope/telescope.nvim',
+    tag = '0.1.6',
     dependencies = {
       'nvim-lua/plenary.nvim',
       'debugloop/telescope-undo.nvim',
@@ -135,7 +145,7 @@ require("lazy").setup({
   },
   {
     "zbirenbaum/copilot-cmp",
-    config = function ()
+    config = function()
       require("copilot_cmp").setup()
     end
   }
