@@ -21,6 +21,12 @@ vim.api.nvim_create_autocmd('LspAttach', {
   end
 })
 
+vim.api.nvim_create_autocmd("BufWritePre", {
+  callback = function()
+    vim.lsp.buf.format({ async = true })
+  end
+})
+
 vim.lsp.enable('luals')
 vim.lsp.enable('ruby_lsp')
 vim.lsp.enable('ts_ls')
