@@ -4,7 +4,7 @@ vim.keymap.set({ 'n', 'v', 's', 'o' }, "k", "l", { silent = true, noremap = true
 vim.keymap.set({ 'n', 'v', 's', 'o' }, "l", "k", { silent = true, noremap = true })
 vim.keymap.set({ 'n', 'v', 's', 'o' }, "h", "j", { silent = true, noremap = true })
 
--- Better saving
+-- Easier saving
 vim.keymap.set("n", "<leader>s", ":w<CR>")
 
 -- Move lines up/down
