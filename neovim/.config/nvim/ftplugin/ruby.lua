@@ -7,6 +7,21 @@ vim.keymap.set("n", "<leader>t", function()
   vim.cmd(command)
 end, { silent = true, buffer = true })
 
+-- Crude breakpoint
+vim.keymap.set('n', '<leader>d', function()
+  local node = vim.treesitter.get_node()
+  if not node then return end
+
+  -- Get node's start position
+  local start_row, start_col = node:start()
+  -- Get the indentation of the node's line
+  local indent = string.rep(' ', vim.fn.indent(start_row + 1))
+
+  vim.api.nvim_put({
+    indent .. 'require "pry" and binding.pry'
+  }, 'l', true, true)
+end, { desc = 'Insert Pry debugger' })
+
 function open_alt_file()
   local current_path = vim.api.nvim_buf_get_name(0)
   local alt_path
@@ -14,13 +29,13 @@ function open_alt_file()
   if current_path:find("/test/") then
     -- Replace "/test/" with "/app/" and "_test.rb" with ".rb"
     alt_path = current_path
-      :gsub("/test/", "/app/")
-      :gsub("_test%.rb$", ".rb")
+        :gsub("/test/", "/app/")
+        :gsub("_test%.rb$", ".rb")
   else
     -- Replace "/app/" with "/test/" and ".rb" with "_test.rb"
     alt_path = current_path
-      :gsub("/app/", "/test/")
-      :gsub("%.rb$", "_test.rb")
+        :gsub("/app/", "/test/")
+        :gsub("%.rb$", "_test.rb")
   end
 
   if current_path == alt_path then
