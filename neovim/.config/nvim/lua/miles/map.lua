@@ -7,6 +7,9 @@ vim.keymap.set({ 'n', 'v', 's', 'o' }, "h", "j", { silent = true, noremap = true
 -- Easier saving
 vim.keymap.set("n", "<leader>s", ":w<CR>")
 
+-- Easier quitting
+vim.keymap.set("n", "<leader>q", ":q<CR>")
+
 -- Move lines up/down
 vim.keymap.set("v", "L", ":m '<-2<CR>gv=gv")
 vim.keymap.set("v", "H", ":m '>+1<CR>gv=gv")
