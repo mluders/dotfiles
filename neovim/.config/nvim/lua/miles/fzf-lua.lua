@@ -1,4 +1,5 @@
 require('fzf-lua').setup({
+  "hide",
   files = {
     cmd = "rg --files --hidden",
     cwd_prompt = false,
