@@ -3,9 +3,9 @@ local cmp = require('cmp')
 cmp.setup({
   sources = {
     { name = 'nvim_lsp', group_index = 1 },
-    { name = 'copilot', group_index = 2 },
-    { name = 'buffer', group_index = 3 },
-    { name = 'path', group_index = 3 }
+    { name = 'copilot',  group_index = 2 },
+    { name = 'buffer',   group_index = 3 },
+    { name = 'path',     group_index = 3 }
   },
 
   mapping = cmp.mapping.preset.insert({

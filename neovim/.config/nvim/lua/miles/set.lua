@@ -41,7 +41,7 @@ vim.opt.colorcolumn = '80'
 
 -- Automatically change to insert mode any time a terminal is opened
 vim.api.nvim_create_autocmd({ 'TermOpen' }, {
-  group = vim.api.nvim_create_augroup('user_term_open', {clear = true}),
+  group = vim.api.nvim_create_augroup('user_term_open', { clear = true }),
   pattern = { '*' },
   command = "startinsert"
 })
