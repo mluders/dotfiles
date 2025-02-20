@@ -2,7 +2,6 @@ setopt share_history
 
 export GPG_TTY=$(tty)
 
-
 # Terminal
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
@@ -28,6 +27,9 @@ alias f='source sessionizer'
 fpath+=("$(brew --prefix)/share/zsh/site-functions")
 autoload -U promptinit; promptinit
 prompt pure
+
+# Auto suggestions
+source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 # fzf
 export ESCDELAY=0 # Remove escape key delay
