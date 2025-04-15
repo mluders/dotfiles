@@ -94,6 +94,9 @@ alias rol2="bundle exec rails db:rollback STEP=2"
 alias purge-dev='bundle exec rails db:migrate:reset RAILS_ENV=development'
 alias purge-test='bundle exec rails db:migrate:reset RAILS_ENV=test'
 
+# Terraform
+alias tf='terraform'
+
 tldiff() {
   git diff --name-only $1 HEAD | grep "test\.rb$" | xargs test_launcher
 }
